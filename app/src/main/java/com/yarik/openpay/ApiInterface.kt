@@ -10,5 +10,5 @@ interface ApiInterface {
     fun getBasicProfile(): Single<Profile>
 
     @GET("/openpay-mobile-test/cards.json")
-    fun getCards(): Single<Array<Card>>
+    fun getCards(): Single<CardsResponse>
 }

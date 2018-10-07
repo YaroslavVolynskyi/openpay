@@ -15,7 +15,7 @@ class Repository() {
                 .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getCards() :Single<Array<Card>> {
+    fun getCards() :Single<CardsResponse> {
         return apiInterface
                 .getCards()
                 .subscribeOn(Schedulers.io())
