@@ -6,19 +6,127 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_image_copy">
 
-    <TextView
-        android:id="@+id/profileName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <RelativeLayout
+        android:id="@+id/profileInfoContainer"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <RelativeLayout
+                android:id="@+id/personalInfoContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7.7dp">
+
+                <LinearLayout
+                    android:layout_alignParentLeft="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/nameTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="6sp"
+                        android:textColor="#38465b"
+                        tools:text="Maxwell Graham"/>
+
+                    <TextView
+                        android:id="@+id/locationTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="4.7sp"
+                        android:textColor="#38465b"
+                        tools:text="Melbourne, Australia"/>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/profileImageView"
+                    tools:src="@drawable/headshot_copy"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="9.7dp"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_below="@id/personalInfoContainer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignStart="@id/personalInfoContainer">
+
+                <ImageView
+                    android:id="@+id/settingsImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/settings"/>
+
+                <ImageView
+                    android:id="@+id/mobileImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12.3dp"
+                    android:src="@drawable/mobile"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#2864ff"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_alignParentBottom="true"/>
+
+    </RelativeLayout>
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/cardsRecylerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#e1e5f3">
     </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/logoContainer"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#2864ff"
+            android:layout_marginEnd="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_alignParentTop="true"/>
+
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:src="@drawable/openpay_brandmark_positive_rgb_copy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
 
 
 </LinearLayout>

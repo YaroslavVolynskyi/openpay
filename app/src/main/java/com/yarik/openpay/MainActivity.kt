@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         cardsViewModel = ViewModelProviders.of(this).get(CardsViewModel::class.java)
-        cardsViewModel.getProfile().observe(this, Observer<Profile> { profileName.text = it!!.firstName })
+        cardsViewModel.getProfile().observe(this, Observer<Profile> { nameTextView.text = it!!.firstName })
         cardsViewModel.loadProfile()
     }
 }
