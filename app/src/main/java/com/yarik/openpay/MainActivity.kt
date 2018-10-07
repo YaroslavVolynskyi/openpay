@@ -10,9 +10,6 @@ import android.support.v7.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v4.view.ViewCompat.animate
-
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         cardsViewModel = ViewModelProviders.of(this).get(CardsViewModel::class.java)
 
         settingsImageView.setOnClickListener { startActivity(SettingsActivity.getStartIntent(this)) }
+
         initCardsRecycler()
         initProfile()
         initCards()
@@ -35,19 +33,6 @@ class MainActivity : AppCompatActivity() {
     private fun initCardsRecycler() {
         cardsRecyclerView.layoutManager = horizontalLayoutManager
         cardsRecyclerView.adapter = adapter
-        cardsRecyclerView.addOnScrollListener(CardsScrollListener)
-    }
-
-    private object CardsScrollListener : RecyclerView.OnScrollListener() {
-        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-            super.onScrollStateChanged(recyclerView, newState)
-            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-            }
-        }
-
-        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-            super.onScrolled(recyclerView, dx, dy)
-        }
     }
 
     private fun initProfile() {
@@ -66,13 +51,13 @@ class MainActivity : AppCompatActivity() {
         cardsViewModel.getCards().observe(this, Observer<List<Card>> { cardsList ->
             adapter.setCards(cardsList)
             Handler().post{
-                val selectedCard = getDefaultCard(cardsList!!)
+                val selectedCard = getDefaultCardIndex(cardsList!!)
                 horizontalLayoutManager.scrollToPosition(selectedCard)
             }
         })
     }
 
-    private fun getDefaultCard(cards: List<Card>): Int {
+    private fun getDefaultCardIndex(cards: List<Card>): Int {
         cards.forEachIndexed { index, card ->
             run {
                 if (card.isDefault) {
@@ -81,10 +66,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
         return 0
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        cardsRecyclerView.removeOnScrollListener(CardsScrollListener)
     }
 }

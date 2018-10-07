@@ -7,9 +7,9 @@ data class Profile(val firstName: String,
 
     data class Location(val country: String,
                         val state: String,
-                        val city: String) {}
+                        val city: String)
 
     data class Avatar(val imageUrl: String,
                       val width: Int,
-                      val height: Int) {}
+                      val height: Int)
 }

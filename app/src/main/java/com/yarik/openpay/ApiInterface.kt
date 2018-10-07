@@ -5,7 +5,6 @@ import retrofit2.http.GET
 
 interface ApiInterface {
 
-
     @GET("/openpay-mobile-test/profile.json")
     fun getBasicProfile(): Single<Profile>
 

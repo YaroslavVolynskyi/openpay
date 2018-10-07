@@ -5,7 +5,7 @@ import android.arch.lifecycle.ViewModel
 import android.util.Log
 import io.reactivex.disposables.Disposable
 
-class CardsViewModel() : ViewModel() {
+class CardsViewModel : ViewModel() {
 
     private val repository: Repository = Repository()
 
