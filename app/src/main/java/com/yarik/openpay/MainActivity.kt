@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -64,8 +65,10 @@ class MainActivity : AppCompatActivity() {
         cardsViewModel.loadCards()
         cardsViewModel.getCards().observe(this, Observer<List<Card>> { cardsList ->
             adapter.setCards(cardsList)
-            val selectedCard = getDefaultCard(cardsList!!)
-            horizontalLayoutManager.scrollToPosition(selectedCard)
+            Handler().post{
+                val selectedCard = getDefaultCard(cardsList!!)
+                horizontalLayoutManager.scrollToPosition(selectedCard)
+            }
         })
     }
 
