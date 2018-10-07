@@ -43,6 +43,10 @@ class MainActivity : AppCompatActivity() {
             if (newState == RecyclerView.SCROLL_STATE_IDLE) {
             }
         }
+
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+        }
     }
 
     private fun initProfile() {
