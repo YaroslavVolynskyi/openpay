@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.card_itemview.view.*
 
 class CardsAdapter : RecyclerView.Adapter<CardsAdapter.CardsViewHolder>() {
@@ -35,7 +36,7 @@ class CardsAdapter : RecyclerView.Adapter<CardsAdapter.CardsViewHolder>() {
     class CardsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(card: Card) {
-            itemView.cardNumber.text = "card test"
+            Picasso.get().load(card.imageUrl).into(itemView.cardImageView)
         }
     }
 }

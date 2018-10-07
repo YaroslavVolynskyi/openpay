@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">openpay</string>
+    <string name="first_x1_lastname_x2">%1$s %2$s</string>
+    <string name="location_x1_x2">%1$s, %2$s</string>
 </resources>

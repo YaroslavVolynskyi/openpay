@@ -4,7 +4,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class Repository() {
+class Repository {
 
     private val apiInterface: ApiInterface = DataManager.getApiInterface()
 
