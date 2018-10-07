@@ -9,10 +9,15 @@ import android.support.v7.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import jp.wasabeef.picasso.transformations.CropCircleTransformation
 import kotlinx.android.synthetic.main.activity_main.*
+import android.support.v4.view.ViewCompat.animate
+
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var cardsViewModel: CardsViewModel
+    private val horizontalLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    private val adapter = CardsAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +26,23 @@ class MainActivity : AppCompatActivity() {
         cardsViewModel = ViewModelProviders.of(this).get(CardsViewModel::class.java)
 
         settingsImageView.setOnClickListener { startActivity(SettingsActivity.getStartIntent(this)) }
+        initCardsRecycler()
         initProfile()
         initCards()
+    }
+
+    private fun initCardsRecycler() {
+        cardsRecyclerView.layoutManager = horizontalLayoutManager
+        cardsRecyclerView.adapter = adapter
+        cardsRecyclerView.addOnScrollListener(CardsScrollListener)
+    }
+
+    private object CardsScrollListener : RecyclerView.OnScrollListener() {
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+            }
+        }
     }
 
     private fun initProfile() {
@@ -39,11 +59,25 @@ class MainActivity : AppCompatActivity() {
     private fun initCards() {
         cardsViewModel.loadCards()
         cardsViewModel.getCards().observe(this, Observer<List<Card>> { cardsList ->
-            val horizontalLayoutManager: RecyclerView.LayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            val adapter = CardsAdapter()
-            cardsRecyclerView.layoutManager = horizontalLayoutManager
-            cardsRecyclerView.adapter = adapter
             adapter.setCards(cardsList)
+            val selectedCard = getDefaultCard(cardsList!!)
+            horizontalLayoutManager.scrollToPosition(selectedCard)
         })
+    }
+
+    private fun getDefaultCard(cards: List<Card>): Int {
+        cards.forEachIndexed { index, card ->
+            run {
+                if (card.isDefault) {
+                    return index
+                }
+            }
+        }
+        return 0
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        cardsRecyclerView.removeOnScrollListener(CardsScrollListener)
     }
 }
